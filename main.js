@@ -12,6 +12,16 @@ const map1 = [
   {object: bigTree, dimensions: {w: 1, h: 4, d: 1}, hex: "964B00", position: {x: 2, y: 0, z: -8}},
 ]
 
+document.querySelector("#app").innerHTML = `
+  <div style="position: fixed;">
+    <div>X: <span id="playerXPos"></span></div>
+    <div>Y: <span id="playerYPos"></span></div>
+  </div>
+`;
+
+let playerXPos = document.querySelector("#playerXPos");
+let playerYPos = document.querySelector("#playerYPos");
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color( 0xADD8E6 );
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -98,5 +108,7 @@ document.onkeydown = e => {
     e.code==="KeyD"?moveRight():"";
     e.code==="KeyA"?moveLeft():"";
     setTimeout(() => {pauseMove = 0}, 300);
+    playerXPos.innerHTML = camera.position.x;
+    playerYPos.innerHTML = camera.position.z;
   }
 }
